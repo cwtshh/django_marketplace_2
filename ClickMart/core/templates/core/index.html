@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Produtos Recentes</h2>
+
+        <div class="grid grid-cols-3 gap-3">
+            {% for item in items %}
+                <div class="rounded-xl">
+                    <a href="#">
+                        <div>
+                            <img src="{{ item.image.url }}" class="object-fill h-96 w-full rounded-t-xl" />
+                        </div>
+                        <div class="p-6 bg-white rounded-b-xl h-40">
+                            <h2 class="text-2xl h-16 text-ellipsis overflow-hidden">{{ item.name }}</h2>
+                            <p class="text-gray-500">R$ {{ item.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Categorias</h2>
+
+        <div class="grid grid-cols-3 gap-3">
+            {% for category in categories %}
+                <div>
+                    <a href="#">
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-2xl">{{ category.name }}</h2>
+                            <p class="text-gray-500">{{ category.items.count }} produtos</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
