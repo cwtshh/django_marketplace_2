@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-5 gap-6">
+        
+        <div class="col-span-3">
+            <img src="{{ item.image.url }}" class="rounded-xl" alt="{{ item.name }}">
+        </div>
+
+        <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
+            <p class="text-gray-400 text-xl mb-3">{{ item.category }} </p>
+            <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+            <p class="text-sky-900 font-semibold text-2xl">R$ {{ item.price }}</p>
+            <p class="text-gray-500">Vendedor: {{ item.created_by.username }}</p>
+
+            <a href="#" class="inline-block mb-6 mt-6 px-6 py-3 text-lg bg-sky-900 text-white rounded-xl hover:bg-sky-700">Contatar Vendedor</a>
+
+            {% if item.description %}
+
+                <p><strong class="text-grey-500">Descrição:</strong></p>
+                <div class="h-52 overflow-scroll">
+                    <p class="text-gray-700">
+                        
+                        {{ item.description }}
+                    </p>
+                </div>
+
+            {% else %}
+
+                <p class="text-gray-500">Não há descrição para este item</p>
+
+            {% endif %}
+            
+        </div>
+    </div>
+
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Produtos Semelhantes</h2>
+
+        <div class="grid grid-cols-4 gap-4">
+            {% for item in related_items %}
+                <div class="rounded-xl">
+                    <a href="{% url 'item:detail' item.id %}">
+                        <div>
+                            <img src="{{ item.image.url }}" class="object-fill h-64 w-full rounded-t-xl" />
+                        </div>
+                        <div class="p-6 bg-white rounded-b-xl h-40">
+                            <h2 class="text-2xl h-16 text-ellipsis overflow-hidden">{{ item.name }}</h2>
+                            <p class="text-gray-500">R$ {{ item.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

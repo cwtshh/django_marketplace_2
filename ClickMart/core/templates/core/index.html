@@ -10,7 +10,7 @@
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
                 <div class="rounded-xl">
-                    <a href="#">
+                    <a href="{% url 'item:detail' item.id %}">
                         <div>
                             <img src="{{ item.image.url }}" class="object-fill h-96 w-full rounded-t-xl" />
                         </div>
