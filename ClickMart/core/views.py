@@ -8,7 +8,7 @@ from .forms import SignUpForm
 
 
 def index(request):
-    items = Item.objects.filter(is_sold=False)[0:6]
+    items = Item.objects.filter(is_sold=False).order_by('-created_at')
     categories = Category.objects.all()
 
     # passa os itens e categorias para o template
